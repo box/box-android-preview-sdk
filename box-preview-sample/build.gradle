@@ -23,6 +23,6 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
     // Box SDKs
-    compile ('com.box:box-android-preview-sdk:1.0.0-SNAPSHOT')
+    compile 'com.box:box-android-preview-sdk:1.0.0'
     compile 'com.box:box-android-browse-sdk:1.1.2'
 }
