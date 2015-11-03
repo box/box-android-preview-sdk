@@ -15,8 +15,10 @@ Currently not supported:
 
 Developer Setup
 --------------
-The box preview sdk is currently private, and distributed as an aar file. 
-You can find the aar file in the libs folder of this project.
+The box preview sdk is currently private, and distributed as an aar file through maven:
+```gradle
+    compile 'com.box:box-android-preview-sdk:1.0.0'
+```
 
 Please refer to the build.gradle file in box-preview-sample for setting up your gradle dependencies.
 
