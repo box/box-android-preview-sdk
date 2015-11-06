@@ -78,7 +78,7 @@ Cache age defines how long an unaccessed file will stay in the cache, if it hasn
 
 Sample App
 --------------
-A sample app can be found in the [box-preview-sample](https://github.com/box/box-android-preview-sdk-release) folder.
+A sample app can be found in the [box-preview-sample](https://github.com/box/box-android-preview-sdk) folder.
 
 Copyright and License
 --------------
