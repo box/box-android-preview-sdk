@@ -7,7 +7,6 @@ Types of files supported:
 - PDFs
 - audio/video files
 - markdown/text/code files
-- 3D mesh files
 - Office documents
 
 Currently not supported:
