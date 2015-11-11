@@ -51,13 +51,6 @@ Another way of doing this, is to directly pass a BoxItems collection to the buil
   
 ```
 
-####Caching files
-You can specify your own cache storage for files being previewed, thumbnails, and metadata by implementing the com.box.androidsdk.preview.PreviewStorage interface, and passing this to the above BoxPreviewActivity.IntentBuilder. If no implementation is provided, box will use its default caching policy. 
-
-```java
-     builder.setPreviewStorage(previewStorageImplementation);
-     
-```
 Precaching files:
 
 To preload files into the cache, without presenting them, make use of com.box.androidsdk.preview.BoxPreviewViewPager.getCacheFileRequest api.
