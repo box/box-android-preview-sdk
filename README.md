@@ -16,7 +16,7 @@ Developer Setup
 --------------
 The box preview sdk is currently private, and distributed as an aar file through maven:
 ```gradle
-    compile 'com.box:box-android-preview-sdk:1.0.0'
+    compile 'com.box:box-android-preview-sdk:2.0.0'
 ```
 
 Please refer to the build.gradle file in box-preview-sample for setting up your gradle dependencies.
@@ -44,9 +44,7 @@ Another way of doing this, is to directly pass a BoxItems collection to the buil
 ```java
 
      builder.setBoxFolder(boxFolder);
-     // or
-     // builder.setBoxItems(boxItems);
-             
+                
   
 ```
 
