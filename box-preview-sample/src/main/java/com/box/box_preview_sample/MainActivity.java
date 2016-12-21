@@ -3,7 +3,6 @@ package com.box.box_preview_sample;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
@@ -12,9 +11,10 @@ import com.box.androidsdk.content.BoxConfig;
 import com.box.androidsdk.content.auth.BoxAuthentication;
 import com.box.androidsdk.content.models.BoxFile;
 import com.box.androidsdk.content.models.BoxFolder;
-import com.box.androidsdk.content.models.BoxList;
 import com.box.androidsdk.content.models.BoxSession;
 import com.box.androidsdk.preview.BoxPreviewActivity;
+
+import java.util.ArrayList;
 
 /**
  * Sample activity that demonstrates preview functionality for BoxFiles of an authenticated user
@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity implements BoxAuthentication
     private static final String ROOT_FOLDER_ID = "0";
 
     /** Maintaining state to support browsing back up to selected folders */
-    private BoxList<BoxFolder> mPathToRoot;
+    private ArrayList<BoxFolder> mPathToRoot;
     private boolean mLoadedRoot;
     private static final String ROOT_IS_LOADED = "Bundle.Current_folder";
     private static final String PATH_TO_ROOT = "Bundle.Path_To_Root";
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements BoxAuthentication
 //        BoxConfig.REDIRECT_URL = "<YOUR_REDIRECT_URI>";
 
         if (savedInstanceState != null) {
-            mPathToRoot = (BoxList<BoxFolder>) savedInstanceState.getSerializable(PATH_TO_ROOT);
+            mPathToRoot = (ArrayList<BoxFolder>) savedInstanceState.getSerializable(PATH_TO_ROOT);
             mLoadedRoot =  savedInstanceState.getBoolean(ROOT_IS_LOADED);
         }
         initialize(false);
@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements BoxAuthentication
      * @param file
      */
     private void launchPreview(BoxFile file) {
-        mPathToRoot = file.getPathCollection();
+        mPathToRoot = file.getPathCollection().getEntries();
         BoxFolder parentFolder = file.getParent() == null ? BoxFolder.createFromId("0") : file.getParent();
         BoxPreviewActivity.IntentBuilder builder = BoxPreviewActivity.createIntentBuilder(this, mSession, file)
                 .setBoxFolder(parentFolder);
