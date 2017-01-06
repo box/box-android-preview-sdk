@@ -17,6 +17,8 @@ Developer Setup
 The box preview sdk is currently private, and distributed as an aar file through maven:
 ```gradle
     compile 'com.box:box-android-preview-sdk:2.0.0'
+    compile 'com.android.support:cardview-v7:23.4.0'
+    compile 'com.android.support:appcompat-v7:23.4.0'
 ```
 
 Please refer to the build.gradle file in box-preview-sample for setting up your gradle dependencies.
