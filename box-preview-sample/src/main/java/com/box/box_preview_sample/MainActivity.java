@@ -3,7 +3,6 @@ package com.box.box_preview_sample;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
 import com.box.androidsdk.browse.activities.BoxBrowseFileActivity;
@@ -15,6 +14,8 @@ import com.box.androidsdk.content.models.BoxSession;
 import com.box.androidsdk.preview.BoxPreviewActivity;
 
 import java.util.ArrayList;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 /**
  * Sample activity that demonstrates preview functionality for BoxFiles of an authenticated user
@@ -39,11 +40,11 @@ public class MainActivity extends AppCompatActivity implements BoxAuthentication
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         BoxConfig.IS_LOG_ENABLED = true;
-        BoxConfig.CLIENT_ID = "<YOUR_CLIENT_ID>";
-        BoxConfig.CLIENT_SECRET = "<YOUR_CLIENT_SECRET>";
+        BoxConfig.CLIENT_ID = "kjilhl3575vip5dfq0j6blljdb55ofb6";
+        BoxConfig.CLIENT_SECRET = "2O1lXEOB0B5OMCbWqLx1I2neS3r0vMtC";
 
         // needs to match redirect uri in developer settings if set.
-//        BoxConfig.REDIRECT_URL = "<YOUR_REDIRECT_URI>";
+        BoxConfig.REDIRECT_URL = "https://example.com/oauth2callback";
 
         if (savedInstanceState != null) {
             mPathToRoot = (ArrayList<BoxFolder>) savedInstanceState.getSerializable(PATH_TO_ROOT);
