@@ -3,7 +3,6 @@ package com.box.box_preview_sample;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
 import com.box.androidsdk.browse.activities.BoxBrowseFileActivity;
@@ -16,11 +15,12 @@ import com.box.androidsdk.preview.BoxPreviewActivity;
 
 import java.util.ArrayList;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 /**
  * Sample activity that demonstrates preview functionality for BoxFiles of an authenticated user
  */
 public class MainActivity extends AppCompatActivity implements BoxAuthentication.AuthListener {
-
 
     BoxSession mSession = null;
 
@@ -28,7 +28,9 @@ public class MainActivity extends AppCompatActivity implements BoxAuthentication
     private static final int PREVIEW_FILE_REQUEST_CODE = 102;
     private static final String ROOT_FOLDER_ID = "0";
 
-    /** Maintaining state to support browsing back up to selected folders */
+    /**
+     * Maintaining state to support browsing back up to selected folders
+     */
     private ArrayList<BoxFolder> mPathToRoot;
     private boolean mLoadedRoot;
     private static final String ROOT_IS_LOADED = "Bundle.Current_folder";
@@ -39,15 +41,15 @@ public class MainActivity extends AppCompatActivity implements BoxAuthentication
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         BoxConfig.IS_LOG_ENABLED = true;
-        BoxConfig.CLIENT_ID = "<YOUR_CLIENT_ID>";
-        BoxConfig.CLIENT_SECRET = "<YOUR_CLIENT_SECRET>";
+        BoxConfig.CLIENT_ID = "<client_id>";
+        BoxConfig.CLIENT_SECRET = "<client_secret>";
 
         // needs to match redirect uri in developer settings if set.
-//        BoxConfig.REDIRECT_URL = "<YOUR_REDIRECT_URI>";
+        BoxConfig.REDIRECT_URL = "<redirect_url>";
 
         if (savedInstanceState != null) {
             mPathToRoot = (ArrayList<BoxFolder>) savedInstanceState.getSerializable(PATH_TO_ROOT);
-            mLoadedRoot =  savedInstanceState.getBoolean(ROOT_IS_LOADED);
+            mLoadedRoot = savedInstanceState.getBoolean(ROOT_IS_LOADED);
         }
         initialize(false);
     }
@@ -55,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements BoxAuthentication
     /**
      * Open the box preview activity for previewing this file
      *
-     * @param file
+     * @param file BoxFile to launch preview for
      */
     private void launchPreview(BoxFile file) {
         mPathToRoot = file.getPathCollection().getEntries();
@@ -68,6 +70,7 @@ public class MainActivity extends AppCompatActivity implements BoxAuthentication
 
     /**
      * Browsing files in the folder using the box browse sdk.
+     *
      * @param folder BoxFolder to browse
      */
     private void browseFolder(BoxFolder folder) {
@@ -76,7 +79,6 @@ public class MainActivity extends AppCompatActivity implements BoxAuthentication
                 BROWSE_FILE_REQUEST_CODE);
     }
 
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         //Response of the box browse api
@@ -84,12 +86,12 @@ public class MainActivity extends AppCompatActivity implements BoxAuthentication
             switch (resultCode) {
                 case Activity.RESULT_OK:
                     if (data.getSerializableExtra(BoxBrowseFileActivity.EXTRA_BOX_FILE) instanceof BoxFile) {
-                    launchPreview((BoxFile) data.getSerializableExtra(BoxBrowseFileActivity.EXTRA_BOX_FILE));
-                } else {
-                    Toast.makeText(this, com.box.androidsdk.preview.R.string
-                            .box_previewsdk_unable_to_access_file, Toast.LENGTH_LONG).show();
-                }
-                break;
+                        launchPreview((BoxFile) data.getSerializableExtra(BoxBrowseFileActivity.EXTRA_BOX_FILE));
+                    } else {
+                        Toast.makeText(this, com.box.androidsdk.preview.R.string
+                                .box_previewsdk_unable_to_access_file, Toast.LENGTH_LONG).show();
+                    }
+                    break;
                 case Activity.RESULT_CANCELED:
                     up();
                     break;
@@ -104,7 +106,7 @@ public class MainActivity extends AppCompatActivity implements BoxAuthentication
                                 mSession.logout().get();
                                 mLoadedRoot = false;
                                 initialize(true);
-                            } catch (Exception e){
+                            } catch (Exception e) {
                                 e.printStackTrace();
                             }
                         }
@@ -165,12 +167,10 @@ public class MainActivity extends AppCompatActivity implements BoxAuthentication
         mLoadedRoot = false;
     }
 
-
     private void loadRootFolder() {
         mLoadedRoot = true;
         browseFolder(BoxFolder.createFromId(ROOT_FOLDER_ID));
     }
-
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
@@ -178,6 +178,5 @@ public class MainActivity extends AppCompatActivity implements BoxAuthentication
         outState.putSerializable(PATH_TO_ROOT, mPathToRoot);
         outState.putBoolean(ROOT_IS_LOADED, mLoadedRoot);
     }
-
 
 }

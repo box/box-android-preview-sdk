@@ -2,7 +2,6 @@ package com.box.box_preview_sample;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -35,13 +34,10 @@ public class CustomBrowseFileActivity extends BoxBrowseFileActivity {
         return true;
     }
 
-
-
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        switch(id) {
+        switch (id) {
             case R.id.login:
                 setResult(RESULT_LOGIN);
                 finish();
@@ -50,15 +46,15 @@ public class CustomBrowseFileActivity extends BoxBrowseFileActivity {
                 setResult(RESULT_LOGOUT);
                 finish();
                 return true;
-             default:
-                 return super.onOptionsItemSelected(item);
+            default:
+                return super.onOptionsItemSelected(item);
 
         }
     }
 
     public static Intent getLaunchIntent(Context context, BoxFolder folder, BoxSession session) {
-        if(folder != null && !SdkUtils.isBlank(folder.getId())) {
-            if(session != null && session.getUser() != null && !SdkUtils.isBlank(session.getUser().getId())) {
+        if (folder != null && !SdkUtils.isBlank(folder.getId())) {
+            if (session != null && session.getUser() != null && !SdkUtils.isBlank(session.getUser().getId())) {
                 Intent intent = new Intent(context, CustomBrowseFileActivity.class);
                 intent.putExtra("extraItem", folder);
                 intent.putExtra("extraUserId", session.getUser().getId());
@@ -76,4 +72,5 @@ public class CustomBrowseFileActivity extends BoxBrowseFileActivity {
         Log.d("custom browse", "back");
         super.onBackPressed();
     }
+
 }

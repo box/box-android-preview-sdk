@@ -16,7 +16,7 @@ Developer Setup
 --------------
 The box preview sdk is currently private, and distributed as an aar file through maven:
 ```gradle
-    compile 'com.box:box-android-preview-sdk:2.0.4'
+    implementation 'com.box:box-android-preview-sdk:3.0.1'
 ```
 
 Please refer to the build.gradle file in box-preview-sample for setting up your gradle dependencies.
@@ -33,7 +33,6 @@ or the [box-browse-sdk](https://github.com/box/box-android-browse-sdk)
 The simplest way to preview a single file, is to start a BoxPreviewActivity, the intent for which can be created using the createIntentBuilder factory method.
 ```java
      BoxPreviewActivity.IntentBuilder builder = BoxPreviewActivity.createIntentBuilder(this, boxSession, boxFile);
-              
 ```
 
 ####Paging through multiple images, audio or video files
@@ -42,10 +41,7 @@ of the same type from the parent folder into a custom ViewPager called the BoxPr
 Another way of doing this, is to directly pass a BoxItems collection to the builder.
 
 ```java
-
      builder.setBoxFolder(boxFolder);
-                
-  
 ```
 
 Precaching files:
@@ -54,11 +50,10 @@ To preload files into the cache, without presenting them, make use of com.box.an
 
 ```java
      FutureTask task = BoxPreviewViewPager.getCacheFileRequest(boxSession, previewStorage, boxFile);
-     
 ```
 Customizing cache policy:
 
-You can customize the max cache size (default 500MB), and cache age (default 90 days) by defininig
+You can customize the max cache size (default 500MB), and cache age (default 90 days) by defining
 
 com.box.androidsdk.preview.PreviewStorage.MAX_CACHE_SIZE 
 com.box.androidsdk.preview.PreviewStorage.MAX_CACHE_AGE
