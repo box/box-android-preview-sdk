@@ -16,7 +16,7 @@ Developer Setup
 --------------
 The box preview sdk is currently private, and distributed as an aar file through maven:
 ```gradle
-    implementation 'com.box:box-android-preview-sdk:3.0.1'
+    implementation 'com.box:box-android-preview-sdk:3.0.3'
 ```
 
 Please refer to the build.gradle file in box-preview-sample for setting up your gradle dependencies.
@@ -35,7 +35,20 @@ The simplest way to preview a single file, is to start a BoxPreviewActivity, the
      BoxPreviewActivity.IntentBuilder builder = BoxPreviewActivity.createIntentBuilder(this, boxSession, boxFile);
 ```
 
-####Paging through multiple images, audio or video files
+### Modifying visibility of document preview menu items
+It's possible to modify visibility of specific menu items in document preview by overriding `bool` resource value in consuming application.
+Options available for modification with their default values:
+
+```xml
+<!-- sets visibility of the grid menu option -->
+<bool name="box_previewsdk_document_menu_grid_visible">true</bool> 
+<!-- sets visibility of the outline menu option -->
+<bool name="box_previewsdk_document_menu_outline_visible">true</bool> 
+```
+
+Example code is provided in the sample app repository.
+
+### Paging through multiple images, audio or video files
 Passing the BoxFolder to the intent builder BoxPreviewActivity allows the sdk to also load other files
 of the same type from the parent folder into a custom ViewPager called the BoxPreviewViewPager. 
 Another way of doing this, is to directly pass a BoxItems collection to the builder.
@@ -44,19 +57,22 @@ Another way of doing this, is to directly pass a BoxItems collection to the buil
      builder.setBoxFolder(boxFolder);
 ```
 
-Precaching files:
+### Precaching files:
 
-To preload files into the cache, without presenting them, make use of com.box.androidsdk.preview.BoxPreviewViewPager.getCacheFileRequest api.
+To preload files into the cache, without presenting them, make use of `com.box.androidsdk.preview.BoxPreviewViewPager.getCacheFileRequest` api.
 
 ```java
      FutureTask task = BoxPreviewViewPager.getCacheFileRequest(boxSession, previewStorage, boxFile);
 ```
-Customizing cache policy:
+
+### Customizing cache policy:
 
 You can customize the max cache size (default 500MB), and cache age (default 90 days) by defining
 
+```java
 com.box.androidsdk.preview.PreviewStorage.MAX_CACHE_SIZE 
 com.box.androidsdk.preview.PreviewStorage.MAX_CACHE_AGE
+```
 
 Cache age defines how long an unaccessed file will stay in the cache, if it hasn't been cleared out of the LRU cache for memory.
 

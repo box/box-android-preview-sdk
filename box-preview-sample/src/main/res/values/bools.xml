@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <bool name="box_previewsdk_document_menu_grid_visible">true</bool>
+    <bool name="box_previewsdk_document_menu_outline_visible">false</bool>
+
+</resources>
