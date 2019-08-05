@@ -28,5 +28,5 @@ android {
 
 dependencies {
     // Box SDKs
-    implementation 'com.box:box-android-preview-sdk:3.0.3'
+    implementation 'com.box:box-android-preview-sdk:3.0.4'
 }
